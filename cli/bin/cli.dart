@@ -8,10 +8,13 @@ void main(List<String> arguments) {
     print("Dartpedia CLI version: $version");
   } else if (arguments[0] == "search") {
     // get the term pass by the arguments if any passed
-    final String term = arguments.sublist(1).join(" ");
+    //? cause the list can be nullable we set it as nullable by adding ?
+    List<String>? inputArgs = arguments.length > 1
+        ? arguments.sublist(1)
+        : null;
 
     // now pass it to the search function
-    searchWikipedia(term);
+    searchWikipedia(inputArgs);
   } else {
     printUsage();
   }
@@ -25,18 +28,21 @@ void printUsage() {
 }
 
 //
-void searchWikipedia(String? term) {
-  // the null-aware assignment operator
-  term ??= "";
-
-// in case nothing passed in the argument cli, we will get as input from the user
-  if (term.isEmpty) {
+void searchWikipedia(List<String>? arguments) {
+  String? searchTerm = "";
+  // in case nothing passed in the argument cli, we will get as input from the user
+  if (arguments == null || arguments.isEmpty) {
     print("Please provide an article title.");
 
-    term = stdin.readLineSync();
+// wait fir the inputs from the user 
+    searchTerm = stdin.readLineSync();
+  } else {
+
+    // other wise joint the arguments
+    searchTerm = arguments.join(" ");
   }
 
-  print("Looking up articles about \"$term\". Please wait.");
+  print("Looking up articles about \"$searchTerm\". Please wait.");
 
   print("Here you go:");
 }
