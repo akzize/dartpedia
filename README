@@ -1,0 +1,12 @@
+# Creating the project
+`dart create` creates and scaffolds a new project. You can also use `-t` to specify a template, like `dart create -t console project_name`.
+
+# Running the project
+
+`dart run bin/cli.dart version`
+OR
+`dart run :cli version`
+
+`version`: is the argument passed to the main to proint the version variable or it will print 
+*Hello Me from Dart World!* if no params passed;
+
