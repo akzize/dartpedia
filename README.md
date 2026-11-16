@@ -32,3 +32,15 @@ void main() {
   print(score); // Output: 10
 }
 ```
+
+# Asynchronous programming in Dart
+the http package
+
+- to install the `http` package `dart pub add http`
+
+or run `dart pub get` after adding in the `pubspec.yaml`
+```yaml
+dependencies:
+  http: ^1.6.0
+
+```
