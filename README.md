@@ -44,3 +44,30 @@ dependencies:
   http: ^1.6.0
 
 ```
+
+### Future:
+
+- `Future` is just like promises in `JS` .  
+- `async`. A keyword placed before a function body `void main() async { ... })` to mark it as asynchronous. It allows you to use `await` inside that function.
+- `await`. A keyword placed in front of a `Future` to pause execution of the current function until the `Future` finishes.
+
+in my case here:
+
+```dart
+Future<String> getWikipediaArticle(String? articleTitle) async { // here defined the type of the function which a promise of type String
+  final url = Uri.https( // Built in class used to parse the links and it's reuqired for the http package as it get's a Uri type param
+    "en.wikipedia.org",
+    '/api/rest_v1/page/summary/$articleTitle',
+  );
+
+  final response = await http.get(url);
+
+  // handle the response
+  if (response.statusCode == 200) {
+    return response.body;
+  }
+
+  return 'Error: Failed to fetch article "$articleTitle". Status code: ${response.statusCode}';
+}
+
+```
