@@ -1,4 +1,5 @@
 # Creating the project
+
 `dart create` creates and scaffolds a new project. You can also use `-t` to specify a template, like `dart create -t console project_name`.
 
 # Running the project
@@ -7,18 +8,20 @@
 OR
 `dart run :cli version`
 
-`version`: is the argument passed to the main to proint the version variable or it will print 
+`version`: is the argument passed to the main to proint the version variable or it will print
 *Hello Me from Dart World!* if no params passed;
 
 # Variables
 
 ## `final` and `const`
+
 - const declares a compile-time constant. The value must be known at compile time and can never change.
 - final creates a variable that can only be initialized once, but its value is determined at runtime, not compile time.
 
+# Operators
 
-# Operators:
 ## The null-aware assignment operator
+
 - `??=` is the null-aware assignment operator. It assigns a value to a variable only if that variable is currently null
 
 ```dart
@@ -34,18 +37,20 @@ void main() {
 ```
 
 # Asynchronous programming in Dart
+
 the http package
 
 - to install the `http` package `dart pub add http`
 
 or run `dart pub get` after adding in the `pubspec.yaml`
+
 ```yaml
 dependencies:
   http: ^1.6.0
 
 ```
 
-### Future:
+### Future
 
 - `Future` is just like promises in `JS` .  
 - `async`. A keyword placed before a function body `void main() async { ... })` to mark it as asynchronous. It allows you to use `await` inside that function.
@@ -71,3 +76,44 @@ Future<String> getWikipediaArticle(String? articleTitle) async { // here defined
 }
 
 ```
+
+# Dart Packages
+
+A Dart package is not simply a class or a file. It's a project or module containing reusable code, its own configuration, and possibly dependencies.
+`dart create -t package command_runner`
+
+```
+command_runner
+├── analysis_options.yaml
+├── CHANGELOG.md
+├── example
+│   └── command_runner_example.dart
+├── lib
+│   ├── command_runner.dart
+│   └── src
+│       └── command_runner_base.dart
+├── pubspec.lock
+├── pubspec.yaml
+├── README.md
+└── test
+    └── command_runner_test.dart
+```
+
+- `command_runner.dart`: (**Public entry point**) This file exposes the code to other projects which in my case `cli`.
+- `command_runner_base.dart`: (**Implementation**) This is where the logic goes.
+
+so in **cli** project in `cli.dart` i can use it as follows:
+
+```dart
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async {
+  var runner = CommandRunner(); 
+  await runner.run(arguments);
+}
+
+```
+
+## Visual explanation
+
+![alt text](docs/images/image.png)
