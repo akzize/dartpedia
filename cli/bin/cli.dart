@@ -1,25 +1,15 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
 
 const version = "0.0.1";
-void main(List<String> arguments) {
-  if (arguments.isEmpty || arguments.first == "help") {
-    printUsage();
-  } else if (arguments[0] == "version") {
-    print("Dartpedia CLI version: $version");
-  } else if (arguments[0] == "search") {
-    // get the term pass by the arguments if any passed
-    //? cause the list can be nullable we set it as nullable by adding ?
-    List<String>? inputArgs = arguments.length > 1
-        ? arguments.sublist(1)
-        : null;
-
-    // now pass it to the search function
-    searchWikipedia(inputArgs);
-  } else {
-    printUsage();
-  }
+/*! here we made the main as asycn since we want to await to wait 
+* for tje runner to finish then procced to next
+*/
+void main(List<String> arguments) async {
+  var runner = CommandRunner(); // creating an instance of the
+  await runner.run(arguments); // here we will use await untill reponse provided
 }
 
 //? This will be used to let the user how to use or know more about the CLI
